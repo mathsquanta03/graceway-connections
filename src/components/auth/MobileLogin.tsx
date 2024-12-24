@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const MobileLogin = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [showOtpInput, setShowOtpInput] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,11 +55,17 @@ const MobileLogin = () => {
     try {
       // Simulating API delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      
+      // Set authentication state
+      localStorage.setItem("isAuthenticated", "true");
+      
       toast({
         title: "Success",
         description: "Login successful!",
       });
-      // Here you would typically redirect to the dashboard or home page
+      
+      // Redirect to admin dashboard
+      navigate("/admin");
     } catch (error) {
       toast({
         title: "Error",
@@ -68,48 +76,50 @@ const MobileLogin = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-6 p-4">
-      <h2 className="text-2xl font-bold text-church-navy">Login with Mobile</h2>
-      <form onSubmit={showOtpInput ? handleVerifyOtp : handleSendOtp} className="w-full max-w-md space-y-4">
-        <div className="space-y-2">
-          <label htmlFor="mobile" className="text-sm font-medium text-gray-700">
-            Mobile Number
-          </label>
-          <Input
-            id="mobile"
-            type="tel"
-            value={mobileNumber}
-            onChange={(e) => setMobileNumber(e.target.value)}
-            placeholder="Enter your mobile number"
-            className="w-full"
-            disabled={showOtpInput}
-          />
-        </div>
-
-        {showOtpInput && (
+    <div className="flex min-h-screen flex-col items-center justify-center space-y-6 p-4 bg-gray-50">
+      <div className="w-full max-w-md space-y-6 rounded-lg bg-white p-8 shadow-lg">
+        <h2 className="text-2xl font-bold text-church-navy text-center">Login with Mobile</h2>
+        <form onSubmit={showOtpInput ? handleVerifyOtp : handleSendOtp} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="otp" className="text-sm font-medium text-gray-700">
-              Enter OTP
+            <label htmlFor="mobile" className="text-sm font-medium text-gray-700">
+              Mobile Number
             </label>
             <Input
-              id="otp"
-              type="text"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              placeholder="Enter 6-digit OTP"
-              maxLength={6}
+              id="mobile"
+              type="tel"
+              value={mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
+              placeholder="Enter your mobile number"
               className="w-full"
+              disabled={showOtpInput}
             />
           </div>
-        )}
 
-        <Button
-          type="submit"
-          className="w-full bg-church-gold hover:bg-church-gold/90"
-        >
-          {showOtpInput ? "Verify OTP" : "Send OTP"}
-        </Button>
-      </form>
+          {showOtpInput && (
+            <div className="space-y-2">
+              <label htmlFor="otp" className="text-sm font-medium text-gray-700">
+                Enter OTP
+              </label>
+              <Input
+                id="otp"
+                type="text"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                placeholder="Enter 6-digit OTP"
+                maxLength={6}
+                className="w-full"
+              />
+            </div>
+          )}
+
+          <Button
+            type="submit"
+            className="w-full bg-church-gold hover:bg-church-gold/90"
+          >
+            {showOtpInput ? "Verify OTP" : "Send OTP"}
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };
