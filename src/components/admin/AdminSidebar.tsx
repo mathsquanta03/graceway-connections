@@ -23,9 +23,11 @@ const AdminSidebar = ({ isOpen }: AdminSidebarProps) => {
 
   return (
     <aside
-      className={`fixed left-0 top-0 z-20 h-full pt-16 flex lg:flex flex-shrink-0 flex-col transition-width duration-300 ${
-        isOpen ? "w-64" : "w-16"
-      } bg-church-navy`}
+      className={`fixed left-0 top-0 z-20 h-full pt-16 transition-all duration-300 ease-in-out
+        ${isOpen ? "w-64" : "w-16"}
+        transform md:translate-x-0
+        ${isOpen ? "-translate-x-full md:translate-x-0" : "-translate-x-full md:translate-x-0"}
+        bg-church-navy shadow-lg`}
     >
       <div className="relative flex-1 flex flex-col min-h-0 pt-0">
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">

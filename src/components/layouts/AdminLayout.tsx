@@ -12,15 +12,17 @@ const AdminLayout = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <AdminNavbar toggleSidebar={toggleSidebar} />
+      <AdminNavbar toggleSidebar={toggleSidebar} isSidebarOpen={sidebarOpen} />
       <AdminSidebar isOpen={sidebarOpen} />
       <div
-        className={`flex flex-col min-h-screen ${
-          sidebarOpen ? "lg:ml-64" : "lg:ml-16"
-        } transition-margin duration-300`}
+        className={`flex flex-col min-h-screen transition-all duration-300 ease-in-out ${
+          sidebarOpen ? "md:ml-64" : "md:ml-16"
+        }`}
       >
-        <main className="flex-1 px-4 pt-20 pb-4">
-          <Outlet />
+        <main className="flex-1 p-4 mt-16">
+          <div className="container mx-auto">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

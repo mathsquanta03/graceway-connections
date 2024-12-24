@@ -1,52 +1,30 @@
 import React from "react";
-import { Bell, Menu } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface AdminNavbarProps {
   toggleSidebar: () => void;
+  isSidebarOpen?: boolean;
 }
 
-const AdminNavbar = ({ toggleSidebar }: AdminNavbarProps) => {
+const AdminNavbar = ({ toggleSidebar, isSidebarOpen = true }: AdminNavbarProps) => {
   return (
-    <nav className="bg-white border-b border-gray-200 fixed w-full z-30 top-0">
-      <div className="px-3 py-3 lg:px-5 lg:pl-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center justify-start">
-            <Button
-              variant="ghost"
-              className="inline-flex mr-3"
-              onClick={toggleSidebar}
-            >
-              <Menu className="h-6 w-6" />
-            </Button>
-            <span className="text-xl font-semibold flex items-center lg:ml-2.5">
-              <span className="text-church-gold">Graceway</span>
-              <span className="text-church-navy ml-2">Admin</span>
-            </span>
-          </div>
-          <div className="flex items-center">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="relative w-8 h-8 rounded-full"
-                >
-                  <Bell className="h-5 w-5" />
-                  <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>New Event Created</DropdownMenuItem>
-                <DropdownMenuItem>New Announcement</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+    <nav className="fixed top-0 left-0 right-0 z-30 bg-white shadow-md">
+      <div className="px-4 py-2 flex items-center justify-between">
+        <div className="flex items-center">
+          <button
+            onClick={toggleSidebar}
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label={isSidebarOpen ? "Collapse Sidebar" : "Expand Sidebar"}
+          >
+            {isSidebarOpen ? (
+              <ChevronLeft className="h-6 w-6 text-gray-600" />
+            ) : (
+              <ChevronRight className="h-6 w-6 text-gray-600" />
+            )}
+          </button>
+          <h1 className="ml-4 text-xl font-semibold text-church-navy">
+            Graceway Church Admin
+          </h1>
         </div>
       </div>
     </nav>
