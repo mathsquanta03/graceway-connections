@@ -66,11 +66,17 @@ const MobileLogin = () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       localStorage.setItem("isAuthenticated", "true");
+      // Mock admin check - in real app, this would come from backend
+      const isAdmin = formData.mobile === "1234567890";
+      localStorage.setItem("userRole", isAdmin ? "admin" : "user");
+      
       toast({
         title: "Success",
         description: isLogin ? "Login successful!" : "Registration successful!",
       });
-      navigate("/admin");
+      
+      // Redirect based on role
+      navigate(isAdmin ? "/admin" : "/user/dashboard");
     } catch (error) {
       toast({
         title: "Error",
