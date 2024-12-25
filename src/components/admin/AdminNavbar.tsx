@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronLeft, ChevronRight, LogOut, Settings, User } from "lucide-react";
+import { LogOut, Settings, User } from "lucide-react";
 import { getCurrentUser } from "@/utils/mockUsers";
 import {
   DropdownMenu,
@@ -32,7 +32,7 @@ const AdminNavbar = ({ toggleSidebar, isSidebarOpen = true }: AdminNavbarProps) 
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-30 bg-church-navy shadow-md">
+    <nav className="fixed top-0 left-0 right-0 z-30 bg-church-navy">
       <div className="px-4 py-2 flex items-center justify-between">
         <div className="flex items-center">
           <h1 className="ml-4 text-xl font-semibold text-white">

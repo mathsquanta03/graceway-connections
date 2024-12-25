@@ -30,11 +30,11 @@ const AdminSidebar = ({ isOpen, toggleSidebar }: AdminSidebarProps) => {
         ${isOpen ? "w-64" : "w-16"}
         transform md:translate-x-0
         ${isOpen ? "-translate-x-full md:translate-x-0" : "-translate-x-full md:translate-x-0"}
-        bg-church-navy shadow-lg`}
+        bg-church-navy`}
     >
       <button
         onClick={toggleSidebar}
-        className={`absolute -right-6 top-20 p-1 bg-church-navy text-white rounded-r-md hover:bg-church-navy/90 transition-colors`}
+        className={`absolute -right-3 top-20 z-50 text-white hover:text-church-gold transition-colors`}
         aria-label={isOpen ? "Collapse Sidebar" : "Expand Sidebar"}
       >
         {isOpen ? (

@@ -1,83 +1,63 @@
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Calendar, Bell } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Users, Calendar, Bell, TrendingUp } from "lucide-react";
 
-const mockData = {
-  weeklyAttendance: [
-    { name: 'Sun', count: 120 },
-    { name: 'Mon', count: 45 },
-    { name: 'Tue', count: 50 },
-    { name: 'Wed', count: 75 },
-    { name: 'Thu', count: 40 },
-    { name: 'Fri', count: 85 },
-    { name: 'Sat', count: 95 },
-  ],
-  totalMembers: 450,
-  upcomingEvents: 3,
-  newAnnouncements: 5,
-};
+const Dashboard = () => {
+  // Mock data for weekly metrics
+  const weeklyMetrics = {
+    totalAttendance: 145,
+    newMembers: 8,
+    announcements: 3,
+    weeklyGrowth: "+12%",
+  };
 
-const AdminDashboard = () => {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold text-church-navy mb-6">
-        Admin Dashboard
-      </h1>
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold text-church-navy">Weekly Overview</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Members</CardTitle>
-            <Users className="h-4 w-4 text-church-gold" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{mockData.totalMembers}</div>
-            <p className="text-xs text-muted-foreground">Active church members</p>
-          </CardContent>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="p-4 flex items-center space-x-4">
+          <div className="p-3 bg-church-gold/10 rounded-full">
+            <Users className="h-6 w-6 text-church-gold" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">Weekly Attendance</p>
+            <h3 className="text-2xl font-bold text-church-navy">{weeklyMetrics.totalAttendance}</h3>
+          </div>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Upcoming Events</CardTitle>
-            <Calendar className="h-4 w-4 text-church-gold" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{mockData.upcomingEvents}</div>
-            <p className="text-xs text-muted-foreground">Events this week</p>
-          </CardContent>
+        <Card className="p-4 flex items-center space-x-4">
+          <div className="p-3 bg-church-gold/10 rounded-full">
+            <TrendingUp className="h-6 w-6 text-church-gold" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">Growth Rate</p>
+            <h3 className="text-2xl font-bold text-church-navy">{weeklyMetrics.weeklyGrowth}</h3>
+          </div>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">New Announcements</CardTitle>
-            <Bell className="h-4 w-4 text-church-gold" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{mockData.newAnnouncements}</div>
-            <p className="text-xs text-muted-foreground">Posted this week</p>
-          </CardContent>
+        <Card className="p-4 flex items-center space-x-4">
+          <div className="p-3 bg-church-gold/10 rounded-full">
+            <Users className="h-6 w-6 text-church-gold" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">New Members</p>
+            <h3 className="text-2xl font-bold text-church-navy">{weeklyMetrics.newMembers}</h3>
+          </div>
+        </Card>
+
+        <Card className="p-4 flex items-center space-x-4">
+          <div className="p-3 bg-church-gold/10 rounded-full">
+            <Bell className="h-6 w-6 text-church-gold" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">Announcements</p>
+            <h3 className="text-2xl font-bold text-church-navy">{weeklyMetrics.announcements}</h3>
+          </div>
         </Card>
       </div>
-
-      <Card className="col-span-4">
-        <CardHeader>
-          <CardTitle>Weekly Attendance</CardTitle>
-        </CardHeader>
-        <CardContent className="w-full h-[300px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={mockData.weeklyAttendance}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="count" fill="#C6A961" /> {/* church-gold color */}
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
     </div>
   );
 };
 
-export default AdminDashboard;
+export default Dashboard;
