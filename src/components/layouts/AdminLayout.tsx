@@ -13,7 +13,7 @@ const AdminLayout = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <AdminNavbar toggleSidebar={toggleSidebar} isSidebarOpen={sidebarOpen} />
-      <AdminSidebar isOpen={sidebarOpen} />
+      <AdminSidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
       <div
         className={`flex flex-col min-h-screen transition-all duration-300 ease-in-out ${
           sidebarOpen ? "md:ml-64" : "md:ml-16"

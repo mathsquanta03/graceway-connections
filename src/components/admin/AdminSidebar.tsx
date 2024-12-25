@@ -6,13 +6,16 @@ import {
   MessageSquare,
   Settings,
   Vote,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 interface AdminSidebarProps {
   isOpen: boolean;
+  toggleSidebar: () => void;
 }
 
-const AdminSidebar = ({ isOpen }: AdminSidebarProps) => {
+const AdminSidebar = ({ isOpen, toggleSidebar }: AdminSidebarProps) => {
   const menuItems = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
     { icon: Calendar, label: "Events", path: "/admin/events" },
@@ -29,6 +32,18 @@ const AdminSidebar = ({ isOpen }: AdminSidebarProps) => {
         ${isOpen ? "-translate-x-full md:translate-x-0" : "-translate-x-full md:translate-x-0"}
         bg-church-navy shadow-lg`}
     >
+      <button
+        onClick={toggleSidebar}
+        className={`absolute -right-6 top-20 p-1 bg-church-navy text-white rounded-r-md hover:bg-church-navy/90 transition-colors`}
+        aria-label={isOpen ? "Collapse Sidebar" : "Expand Sidebar"}
+      >
+        {isOpen ? (
+          <ChevronLeft className="h-5 w-5" />
+        ) : (
+          <ChevronRight className="h-5 w-5" />
+        )}
+      </button>
+
       <div className="relative flex-1 flex flex-col min-h-0 pt-0">
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
           <div className="flex-1 px-3 space-y-1">
